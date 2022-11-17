@@ -1,0 +1,348 @@
+\documentclass[dvipsnames,11pt]{article}
+\usepackage[utf8]{inputenc}	% Para caracteres en español
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{tikz}
+\usepackage{multirow,booktabs}
+%\usepackage[table]{xcolor}
+\usepackage{fullpage}
+\usepackage{lastpage}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{wrapfig}
+\usepackage{setspace}
+\usepackage{calc}
+\usepackage{multicol}
+\usepackage{cancel}
+\usepackage[retainorgcmds]{IEEEtrantools}
+\usepackage[margin=3cm]{geometry}
+\usepackage{amsmath}
+\newlength{\tabcont}
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+\usepackage{empheq}
+\usepackage{framed}
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+\usetikzlibrary{positioning}
+\usepackage{enumitem}
+
+
+\colorlet{shadecolor}{orange!15}
+\parindent 0in
+\parskip 12pt
+\geometry{margin=1in, headsep=0.25in}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem{reg}{Rule}
+\newtheorem{exer}{Exercise}
+\newtheorem{note}{Note}
+
+\newcounter{example}[section]
+\newcounter{exercise}[section]
+
+%\newcommand\hl[1]{\colorbox{pink}{#1}}
+\newcommand\hl[1]{\fcolorbox{black}{white}{\color{white}#1}}
+
+
+\newcommand\rmk{\colorbox{BlueGreen!15}{Note:}}
+
+%\newcommand\ex[2]{\refstepcounter{example}
+%\begin{center}
+%\fcolorbox{Bittersweet}{SkyBlue}{\parbox{\textwidth}{
+%\fcolorbox{Bittersweet}{White}{
+%\parbox{6.35in}{\textbf{Example~\theexample: }\\#1}
+%	}\vspace{5pt}
+%\fcolorbox{Purple}{White}{
+%\parbox{6.35in}{\textbf{Solution: }\\#2}
+%	}
+%	}
+%	}
+%\end{center}
+%}
+
+
+\newcommand\ex[2]{\refstepcounter{example}
+\begin{center}
+\fcolorbox{Bittersweet}{SkyBlue}{\parbox{\textwidth}{
+\fcolorbox{Bittersweet}{White}{
+\parbox{6.35in}{\textbf{Example~\theexample: }\\#1}
+	}\vspace{5pt}
+\fcolorbox{Purple}{White}{
+\parbox{6.35in}{\textbf{Solution: }\\
+	\color{white}	#2
+	\vspace{
+	.5in}}
+	}
+	}
+	}
+\end{center}
+}
+
+\newcommand\formula[2]{\begin{shaded}
+\textbf{#1} \newline
+#2
+\end{shaded}
+}
+
+\newcommand\exercise[2]{\refstepcounter{exercise}
+\begin{center}
+\fcolorbox{DarkOrchid}{Dandelion}{\parbox{\textwidth}{
+\fcolorbox{DarkOrchid}{White}{
+\parbox{6.35in}{\textbf{Exercise~\theexercise: }\\#1}
+	}\vspace{5pt}
+\fcolorbox{Aquamarine}{White}{
+\parbox{6.35in}{\textbf{Answer: }\\#2}
+	}
+	}
+	}
+\end{center}
+}
+
+
+\begin{document}
+\Large
+\setcounter{section}{8}
+\title{Section 10.2 Annuities}
+
+\thispagestyle{empty}
+
+\begin{center}
+{\LARGE \bf Section 5.5 Permutations and combinations}\\
+{\large Math 1300}\\
+Fall 2019
+\end{center}
+
+\ex{\begin{enumerate}
+\item Consider the letters in the set $\{a,b,c\}.$ How many different \textit{strings} of two \textit{distinct} letters can be formed? 
+
+\item A construction crew has three members with names
+$A$, $B$, and $C.$ How many \textit{different} two-person teams can be
+formed from this crew?
+\end{enumerate}
+
+}
+{
+\begin{enumerate}
+\item Since these are strings of letters, order matters. For example $ab$ and $ba$ are considered different. We have
+$$ab,ac,ba,bc,ca,cb.$$
+So 6.
+
+\item In this case order does not matter: if $A$ is in a team with $B,$ then $B$ is in a team with $A.$ We only have
+$$ AB, AC, BC .$$ 
+So 3.
+\end{enumerate}
+}
+
+In this example, we have to consider two different kinds of situations: the case when order matters and the case when order does not matter.
+
+\section*{Permutations}
+
+A \hl{permutation} of $n$ objects taken $r$ at a time is an arrangement of $r$ of the $n$ objects in a specific order. We will denote the number of permutations by $P(n,r).$
+
+\ex{
+Consider a baseball team of 9 players forming lines of 3,6, and 9 players. How many different ways can each of these types of lines be formed? 
+}{
+In this case, order matters.\\
+\textbf{3 Players: } 
+\begin{center}
+  \begin{tabular}{ c | c }
+    \hline
+    Place in line 		& No. of possibilities  \\ \hline
+    1					& 9 					\\ 	\hline
+    2 					& 8						\\ 	\hline
+    3 					& 7						\\	\hline
+  \end{tabular}
+\end{center}
+So there are $9\cdot 8\cdot 7 = 504$ permutations.\\
+Notice that this is $9\cdot (9-1) \cdot (9-2).$ 
+
+\textbf{6 Players: }
+\begin{center}
+  \begin{tabular}{ c | c }
+    \hline
+    Place in line 		& No. of possibilities  \\ \hline
+    1					& 9 					\\ 	\hline
+    2 					& 8						\\ 	\hline
+    3 					& 7						\\	\hline
+    4 					& 6						\\	\hline
+    5 					& 5						\\	\hline
+    6 					& 4						\\	\hline
+  \end{tabular}
+\end{center} 
+So there are $9\cdot 8\cdot 7\cdot 6\cdot 5\cdot 4 = 60,480$ permutations. \\
+Notice that this is $9\cdot (9-1) \cdot (9-2)\cdot (9-3)\cdot(9-4)\cdot(9-5).$ 
+
+\textbf{9 Players: }
+\begin{center}
+  \begin{tabular}{ c | c }
+    \hline
+    Place in line 		& No. of possibilities  \\ \hline
+    1					& 9 					\\ 	\hline
+    2 					& 8						\\ 	\hline
+    3 					& 7						\\	\hline
+    4 					& 6						\\	\hline
+    5 					& 5						\\	\hline
+    6 					& 4						\\	\hline
+    7 					& 3						\\	\hline
+    8 					& 2						\\	\hline
+    9 					& 1						\\	\hline
+  \end{tabular}
+\end{center} 
+So there are $9! = 362,880$ permutations. 
+}
+
+%You may notice that there's a pattern to each of the solutions above.
+%\newpage
+
+\formula{Permutation formula 
+}
+{
+The number of permutations of $n$ objects taken $r$ at a time, $P(n,r),$ is given by
+$$  P(n,r) = n(n-1)(n-2)\cdots (n-r+1)=\dfrac{n!}{(n-r)!}. $$
+}
+
+
+\ex{Compute the following:
+\begin{enumerate}
+\item $P(100,2)$
+\item $P(6,4)$
+\item $P(5,5)$
+\end{enumerate}
+}{
+\begin{enumerate}
+\item $P(100,2)=100\cdot 99 = 9900$
+\item $P(6,4) = 6\cdot 5\cdot 4\cdot 3 = 360$
+\item $P(5,5)=5\cdot 4\cdot 3\cdot 2\cdot 1 = 5!=120$
+\end{enumerate}
+}
+\newpage
+Putting this product into the calculator is very tedious! So of course there is a way to plug it in faster.
+
+\formula{Permutations on a calculator
+}
+{
+You can find the number of permutations, $P(n,r),$ using a calculator by the sequence of keys
+$$ \fbox{n}\; \fbox{nPr}\; \fbox{r}\;\fbox{=}. $$ 
+} 
+Then for $P(9,4),$ you would press
+$$ \fbox{9}\; \fbox{nPr}\; \fbox{4}\;\fbox{=} $$
+to get 3024.
+
+\rmk When asked how many ways you can order $n$ objects, the answer is 
+$$ P(n,n)=n! $$
+
+\newpage
+
+\section*{Combinations}
+
+A \hl{combination} of $n$ objects taken $r$ at a time is a selection of $r$ objects from among the $n,$ with order disregarded. The number of combinations is given by $C(n,r).$ The formula is given by
+
+\formula{
+Combination formula
+}{
+The number of combinations of $n$ objects taken $r$ at a time is 
+$$ C(n,r) = \dfrac{P(n,r)}{r!} = \dfrac{n(n-1)(n-2)\cdots (n-r+1)}{r!}  $$
+or 
+$$ C(n,r) = \dfrac{n!}{r!(n-r)!} .$$
+}
+
+
+
+\ex{Compute the following:
+\begin{enumerate}
+\item $C(100,2)$
+\item $C(6,4)$
+\item $C(5,5)$
+\end{enumerate}
+}{
+\begin{enumerate}
+\item $C(100,2)= \dfrac{100\cdot 99}{2!} = 4950$
+\item $C(6,4) = \dfrac{6\cdot 5\cdot 4\cdot 3}{4!} = 15 $
+\item $C(5,5)=\dfrac{5\cdot 4\cdot 3\cdot 2\cdot 1}{5!}=\dfrac{5!}{5!} =1$
+\end{enumerate}
+}
+
+\newpage
+
+Yet again there is a way to calculate this in one move:
+
+\formula{Combinations on a calculator
+}
+{
+You can find the number of permutations, $C(n,r),$ using a calculator by the sequence of keys
+$$ \fbox{n}\; \fbox{nCr}\; \fbox{r}\;\fbox{=}. $$ 
+} 
+
+\section*{Applying the permutation and combination formulas}
+
+\ex{
+A high school student
+decided to apply to four of the eight Ivy League colleges. In
+how many possible ways can the four colleges be selected?
+}
+{
+It does not matter what order the student applies to each college as long as they apply on time. So we have
+$$ C(8,4) = 70 $$
+}
+
+\ex{
+A board of directors has 10 members.
+\begin{enumerate}
+\item In how
+many ways can a committee of 3 be chosen? 
+\item In how many ways
+can a chairperson, vice chairperson, and secretary be chosen?
+\end{enumerate}
+}{
+\begin{enumerate}
+\item Since the committee members can be chosen without regard to order, we have
+$$ C(10,3)=120 $$
+\item In this case, order matters- whoever is chosen for chairperson cannot become vice chairperson or secretary and so on. Then 
+$$ P(10,3) = 720. $$ 
+\end{enumerate}
+}
+
+\ex{
+If 8 horses are entered in a horse race how many
+different 1st, 2nd, 3rd place finishes are possible?
+}{
+Order matters:
+$$ P(8,3) = 336 $$
+}
+
+\ex{
+A political pollster wishes to draw a sample of
+1500 individuals from among a population of 5,000,000
+individuals.
+}
+{
+Order does not matter when taking polls, so we have 
+$$ C(5000000,1500). $$
+Your calculator cannot find this answer. In fact, the number has 5934 digits.
+}
+
+\ex{
+Three couples go to a movie together. In how
+many ways can they be seated in 6 seats so that each couple
+is seated together?
+}{
+Assuming the couples walk into the movie theater together, where the first couple sits will affect how the next couple needs to be arranged. Thus order matters. \\
+So in how many ways can the 3 couples enter:
+$$ P(3,3) = 3!. $$
+But now the arrangement of each individual in each couple can be different. Each couple can sit in 2 ways. Thus by the generalized multiplication principle, we have 
+$$ 3! \cdot 2\cdot 2 \cdot 2 = 48. $$ 
+}
+
+\ex{
+At a benefit concert, 6
+bands have volunteered to perform but there is only enough
+time for four of the bands to play. How many lineups are
+possible?
+}
+{
+Since there is a lineup order matters thus
+$$ P(6,4) =360. $$
+}
+
+\end{document}
